@@ -3,6 +3,11 @@
 This directory contains the scripts and analysis files that were used to generate the results shown in Figure 2
 ![](../writeUp/threePanelFigure.png)
 
+The script [bin/plotDrosophila_plusSimulations.R](bin/plotDrosophila_plusSimulations.R) contains the code to do all the statistical analyses and the plotting for this part of the paper. 
+
+Below I demonstrate the code used to generate the simulated data and to analyse the empirical data.
+
+
 # Simulated data
 
 I used *stdpopsim* to model the entire *D. melanogaster* genome incorporating the recombination rate variation estimated by Comeron et al (2012).
