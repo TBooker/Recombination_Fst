@@ -56,26 +56,26 @@ I use the script (read_VCF.py)[bin/read_VCF.py] to generate an input file from t
 Run the simulation script for each of the normal autosomes (sorry dot chromosome!). Here I make use of GNU parallel, but you don't have to parallelise it this way if you don't want to.
 
 ```
-parallel "python3.6 ../run_2Pop_simulations.py chr{}" ::: 2L 2R 3L 3R
+parallel "python3.6 bin/run_2Pop_simulations.py chr{}" ::: 2L 2R 3L 3R
 ```
 
 Now, convert the VCF file for each autosome into an input format that we can get from the Reinhardt et al data...
 
 ```
-parallel "python ../../../Fst_calculator/bin/read_VCF.py --VCF drosophilaSimulated.chr{}.vcf -o drosophilaSimulated.chr{}.txt" ::: 2L 2R 3L 3R
+parallel "python bin/read_VCF.py --VCF drosophilaSimulated.chr{}.vcf -o drosophilaSimulated.chr{}.txt" ::: 2L 2R 3L 3R
 ```
 This produces a file for each chromosome with the number of alleles of each type for each biallelic SNP in the simulated population
 
 Now we calculate Fst for each site and get the weighted average (using the ratio of averages approach outlined in Weir's textbook) in analysis windows of 10,000bp.
 
 ```
-parallel "python ../../../Fst_calculator/bin/calculateFst.py --freqs drosophilaSimulated.chr{}.txt --MAF 0.05 > drosophilaSimulated.chr{}.fst" ::: 2L 2R 3L 3R
+parallel "python bin/calculateFst.py --freqs drosophilaSimulated.chr{}.txt --MAF 0.05 > drosophilaSimulated.chr{}.fst" ::: 2L 2R 3L 3R
 ```
 
 Now grab the recombination rates from the genetic map and add that to the analysis files.
 
 ```
-parallel "python ../../../Fst_calculator/add_recombination_rates.py --input drosophilaSimulated.chr{}.fst --output drosophilaSimulated.chr{}.fst.csv --g_map ../chr{}.map.txt" ::: 2L 2R 3L 3R
+parallel "python bin/add_recombination_rates.py --input drosophilaSimulated.chr{}.fst --output drosophilaSimulated.chr{}.fst.csv --g_map ../chr{}.map.txt" ::: 2L 2R 3L 3R
 ```
 This script just looks up the recombination rates from the map given in **stdpopsim**. It let's you know if has had to calculate a weighted average recombination rate for a particular analysis window.
 
