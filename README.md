@@ -1,6 +1,6 @@
 # Recombination rate variation and population genetic summary statistics
 
-A repository containing the scripts and analysis results behind the manuscript "Variation in recombination affects detection of Fst outliers under neutrality". The manuscript is currently in review and we will deposit it on BioRXiv in the coming days.
+A repository containing the scripts and analysis results behind the manuscript ["Variation in recombination affects detection of Fst outliers under neutrality"](https://www.biorxiv.org/content/10.1101/2020.02.06.937813v1).
 
 There are two main parts to this repository:
 
