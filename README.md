@@ -25,3 +25,11 @@ The figure shows how variable recombination rates are across the genomes of thre
 Check out the pre-print for a more complete picture, but the basic idea is this: Regions of the genome with low recombination rates will be underlain by few independant coalescent histories compared to more highly recombining reigons. When you average summary statstics across multiple SNPs in the low recombination case, the sampling distribution should have a higher variance than regions with high recombination. This difference means that there may be a greater 
 
 We think that it does, and specifically that population genetic summary statistics calculated in regions of low recombination may have a different sampling distribution to statistics calculated in more highly recombining regions. 
+
+I downloaded the human recombination maps from Kong et al (2010) from http://www.decode.com/addendum. 
+The Collared Flycatcher recombination rate estimates are from Kawakami et al (2014) Mol. Ecol.  http://www.decode.com/addendum.
+I downloaded the human recombination maps from Kong et al (2010) from https://onlinelibrary.wiley.com/doi/full/10.1111/mec.12810.
+The Drosophila recombination rates are accessible at: htps://petrov.stanford.edu/cgi-bin/recombination-rates_updateR5.pl, they come from Comeron et al (2012) PLoS Genetics
+
+
+
