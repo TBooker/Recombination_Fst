@@ -13,7 +13,7 @@ Within each of the directories, you'll find all the code to run the simualtions 
 ## Motivation
 
 This study was motivated by the following pattern:
-
+![](Recombination_Fst/writeUp/RecRateVariation.png)
 
 The figure shows how variable recombination rates are across the genomes of three animal species that have been subject to genome scan studies. All three organsisms exhibit wide variation in recombination rate, over at least an order of magnitude. What we wanted to know was, does such variation in recombination rate affect our the outcome of genome scans? 
 
