@@ -13,6 +13,8 @@ Within each of the directories, you'll find all the code to run the simulations 
 
 The manuscript tex file is available too. [writeUp/](writeUp/)
 
+I've gone throught the scripts to try and make sure all paths are relative, but there may be some places where you have to make the paths work for your machine.
+
 ## Motivation
 
 This study was motivated by the following pattern:
