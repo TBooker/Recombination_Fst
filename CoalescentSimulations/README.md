@@ -9,7 +9,11 @@ In the MS we present results for an island model, but we explored other models t
 
 The script entitled planeScript.py is a python3 script that implements the msprime simulations and analysis of the data described in the paper. It takes a while to run if you do lots of reps.
 
-It is called planeScript.py because I wrote most of it on a plane.
+It is called ```planeScript.py``` because I wrote most of it on a plane.
 
-The script calculates *F<sub>ST</sub>*, the standard error of *F<sub>ST</sub>*, *D<sub>XY</sub>* and extracts the number of coalescent trees from the 10,000bp sequence simulated.
+The ```planeScript.py``` script calculates *F<sub>ST</sub>*, the standard error of *F<sub>ST</sub>*, *D<sub>XY</sub>* and extracts the number of coalescent trees from the 10,000bp sequence simulated and writes it all to a CSV file for ease of plotting in R.
 
+
+The script [PlotCoalescentSimulations.R](PlotCoalescentSimulations.R) plots the results of the coalescent simulations.
+
+![](Fst_Dxy_Plot.png)
