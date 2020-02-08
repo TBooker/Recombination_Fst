@@ -16,4 +16,9 @@ The ```planeScript.py``` script calculates *F<sub>ST</sub>*, the standard error 
 
 The script [PlotCoalescentSimulations.R](PlotCoalescentSimulations.R) plots the results of the coalescent simulations.
 
+
+
 ![](Fst_Dxy_Plot.png)
+
+
+PS. If you read the paper and were annoyed by us saying that the *D<sub>XY</sub>* results were *data not shown*, here are those results. We were trying to get the paper to fit the fairly restrictive article type specifications. Supp. Mat. was not allowed for some reason.
