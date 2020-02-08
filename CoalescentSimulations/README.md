@@ -7,6 +7,9 @@ In the MS we present results for an island model, but we explored other models t
 * 1-dimensional ring - The same as the cline, except that the ends join up
 * Isolation/Migration - 2 demes that exchange migrants at equal rates
 
-The script entitled planeScript.py is a python3 script that implements the msprime simulations and analysis of the data described in the paper.
+The script entitled planeScript.py is a python3 script that implements the msprime simulations and analysis of the data described in the paper. It takes a while to run if you do lots of reps.
 
 It is called planeScript.py because I wrote most of it on a plane.
+
+The script calculates *F<sub>ST</sub>*, the standard error of *F<sub>ST</sub>*, *D<sub>XY</sub>* and extracts the number of coalescent trees from the 10,000bp sequence simulated.
+
