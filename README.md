@@ -2,6 +2,9 @@
 
 A repository containing the scripts and analysis results behind the manuscript ["Variation in recombination affects detection of Fst outliers under neutrality"](https://www.biorxiv.org/content/10.1101/2020.02.06.937813v1).
 
+*Please feel free to reach out to me if you have questions about the material in this repository*
+
+
 There are two main parts to this repository:
 
  1. The sampling distribution of *F<sub>ST</sub>* calculated in analysis windows of fixed physical size for coalescent simulations of an island model - these simulations went into Figure 1 in the MS. There are also simulation results for demographies other than the island model we present in the manuscript. All the code and results shown in the paper are here: [CoalescentSimulations/](CoalescentSimulations/)
