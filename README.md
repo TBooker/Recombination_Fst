@@ -2,8 +2,7 @@
 
 A repository containing the scripts and analysis results behind the manuscript ["Variation in recombination affects detection of Fst outliers under neutrality"](https://www.biorxiv.org/content/10.1101/2020.02.06.937813v1).
 
-*Please feel free to reach out to me if you have questions about the material in this repository*
-*Contact info is available at my website: https://tbooker.github.io/*
+*Please feel free to reach out to me if you have questions about the material in this repository. Contact info is available on my website: https://tbooker.github.io/*
 
 There are two main parts to this repository:
 
