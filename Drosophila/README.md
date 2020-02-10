@@ -97,3 +97,35 @@ This process should result in the files:
 Except that there will be one per autosome.
 
 # Empirical data
+
+I analysed the *pool-seq* data for *Drosophila melanogaster* collected by [Reinhardt *et al* (Genetics - 2014)](https://www.genetics.org/content/197/1/361). I got in touch with the authors of that paper and they sent me all the data they generated for that paper except the short reads (which are available on the SRA - follow links in the paper). In their study, Reinhardt *et al* sequenced multiple *D. melanogaster* individuals from the Eastern USA (Maine and Flo.Rida). They collected pools of 17 isofemale lines and sequenced them in pools to estimate allele frequencies at many polymorphic sites across the genome. In their study, they also examined a similar pair of popuations sampled in Australia, and showed overlapping $Fst$ outliers common to the *Drosophila* populations on both continents. Their study is very interesting, so I recommend you read it if you are interested in the present study. 
+
+Given the storage limits of a GitHub repository, I add a zipped version of the derived allele freuency files for North America and the downstream processed files. If you want their full data, I recommend that you get in touch with them.  
+
+The data that I received from Reinhardt *et al* contained the derived allele frequencies obtained from their *pooled-seq* analyses. The data was structured as follows:
+```
+# CHROM	POS	REF	ALT	POP1_alleles	POP2_alleles
+chr2L	1111	A	T	AAAATT	AAAAAA
+chr2L	1135	A	T	AATT	AAAA
+chr2L	1631	A	T	AAAAT	AAAAA
+```
+
+I parsed this data and generated a new file that had a similar structure, but allowed me to analyse the genome-wide simulated data.
+
+I then calculated Fst using a haploid implementation of the popular Weir and Cockerham method. *Fst* can be thought of as the standardised variance in allele frequencies among demes of a metapopulation. Variants with higher allele frequency carry provide more reliable estiamtes of Fst than do variants with low frequency and the Weir and Cockerham method weights the contribution of each polymorphism to overall Fst based on the mean allele frequency. The method outlined in Weir's textbook is a ratio of averages rather than an average of ratios ([see Bhatia et al for why this is important](https://genome.cshlp.org/content/23/9/1514.long)).  
+
+
+## Analysis of simulated and empirical data
+
+Once I analyse both simulated and empirical datasets, I analyse the data in the R script [plotDrosophila_plusSimulations.R](bin/plotDrosophila_plusSimulations.R).
+
+I have added comments to the R code to try and make it transparant. 
+
+
+
+
+
+
+
+
+
