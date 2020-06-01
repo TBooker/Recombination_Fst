@@ -14,11 +14,11 @@ It is called ```planeScript.py``` because I wrote most of it on a plane.
 The ```planeScript.py``` script calculates *F<sub>ST</sub>*, the standard error of *F<sub>ST</sub>*, *D<sub>XY</sub>* and extracts the number of coalescent trees from the 10,000bp sequence simulated and writes it all to a CSV file for ease of plotting in R.
 
 
-The script [PlotCoalescentSimulations.R](PlotCoalescentSimulations.R) plots the results of the coalescent simulations.
+The script [plotHistograms.R](plotHistograms.R) plots the results of the coalescent simulations.
 
 
 
-![](Fst_Dxy_Plot.png)
+![](Plots/Island_Fst_Plot.pdf)
 
 
 PS. If you read the paper and were annoyed by us saying that the *D<sub>XY</sub>* results were *data not shown*, here are those results. We were trying to get the paper to fit the fairly restrictive article type specifications. Supp. Mat. was not allowed for some reason.
