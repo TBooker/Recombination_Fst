@@ -67,7 +67,7 @@ parallel "python3.6 bin/run_2Pop_simulations.py chr{}" ::: 2L 2R 3L 3R
 Now, convert the VCF file for each autosome into an input format that we can get from the Reinhardt et al data...
 
 ```
-parallel "python bin/read_VCF.py --VCF drosophilaSimulated.chr{}.vcf -o drosophilaSimulated.chr{}.txt" ::: 2L 2R 3L 3R
+parallel "python bin/read_VCF.py --VCF Simulated/VCF/drosophilaSimulated.chr{}.vcf -o drosophilaSimulated.chr{}.txt" ::: 2L 2R 3L 3R
 ```
 This produces a file for each chromosome with the number of alleles of each type for each biallelic SNP in the simulated population
 
@@ -96,13 +96,17 @@ This process should result in the files:
 	drosophilaSimulated.CHROM.fst.csv
 Except that there will be one per autosome.
 
+
+In the above I used analysis windows of a fixed physical size, but SNP-based windows are implemented by the calculateFst.py script. 
+
+
 # Empirical data
 
-I analysed the *pool-seq* data for *Drosophila melanogaster* collected by [Reinhardt *et al* (Genetics - 2014)](https://www.genetics.org/content/197/1/361). I got in touch with the authors of that paper and they sent me all the data they generated for that paper except the short reads (which are available on the SRA - follow links in the paper). In their study, Reinhardt *et al* sequenced multiple *D. melanogaster* individuals from the Eastern USA (Maine and Flo.Rida). They collected pools of 17 isofemale lines and sequenced them in pools to estimate allele frequencies at many polymorphic sites across the genome. In their study, they also examined a similar pair of popuations sampled in Australia, and showed overlapping *Fst* outliers common to the *Drosophila* populations on both continents. Their study is very interesting, so I recommend you read it if you are interested in the present study. 
+I analysed the *pool-seq* data for *Drosophila melanogaster* collected by [Reinhardt *et al* (Genetics - 2014)](https://www.genetics.org/content/197/1/361). I got in touch with the authors of that paper and they sent me all the data they generated for their study except the short reads (which are available on the SRA - follow links in the paper). In their study, Reinhardt *et al* sequenced multiple *D. melanogaster* individuals from the Eastern USA (Maine and Flo.Rida). They collected pools of 17 isofemale lines and sequenced them in pools to estimate allele frequencies at many polymorphic sites across the genome. In their study, they also examined a similar pair of populations sampled in Australia, and showed overlapping *Fst* outliers common to the *Drosophila* populations on both continents. Their study is very interesting, so I recommend you check it out. 
 
-Given the storage limits of a GitHub repository, I add the derived allele frequency files for North America and the downstream processed files [Reinhardt_et_al_data/](Reinhardt_et_al_data/). If you want their full data, I recommend that you get in touch with them.
+I re-analysed the Reinhardt *et al* data using their exact pipeline, except that I used 10,000bp analysis windows (1,000bp analysis windows were used in the original study). I used the scripts sent to me by the authors of that study, specifically the script "04_calcWinFst.sh". Given the storage limits of a GitHub repository, I add the processed derived allele frequency files for North America and the downstream processed files [Reinhardt_et_al_data/](Reinhardt_et_al_data/). If you want their full data, I recommend that you get in touch with them.
 
-The data that I received from Reinhardt *et al* contained the derived allele frequencies obtained from their *pooled-seq* analyses. The data was structured as follows:
+The Reinhardt *et al* data contained the derived allele frequencies obtained from their *pooled-seq* analyses. I processed their data to get a file that was structured as follows:
 ```
 # CHROM	POS	REF	ALT	POP1_alleles	POP2_alleles
 chr2L	1111	A	T	AAAATT	AAAAAA
@@ -110,11 +114,48 @@ chr2L	1135	A	T	AATT	AAAA
 chr2L	1631	A	T	AAAAT	AAAAA
 ```
 
-I parsed this data and generated a new file that had a similar structure, but allowed me to analyse the genome-wide simulated data in the same way as the simulation data.
+I then calculated Fst using a haploid implementation of the popular Weir and Cockerham method. *Fst* can be thought of as the standardised variance in allele frequencies among demes of a metapopulation. Variants with higher allele frequency provide more information about Fst than do variants at low frequency - the Weir and Cockerham method weights the contribution of each polymorphism to overall *Fst* based on the mean allele frequencies. The method outlined in Weir's textbook is a ratio of averages rather than an average of ratios ([see Bhatia et al for why this is important](https://genome.cshlp.org/content/23/9/1514.long)).  
 
-I then calculated Fst using a haploid implementation of the popular Weir and Cockerham method. *Fst* can be thought of as the standardised variance in allele frequencies among demes of a metapopulation. Variants with higher allele frequency carry provide more reliable estimates of Fst than do variants at low frequency and the Weir and Cockerham method weights the contribution of each polymorphism to overall *Fst* based on the mean allele frequencies. The method outlined in Weir's textbook is a ratio of averages rather than an average of ratios ([see Bhatia et al for why this is important](https://genome.cshlp.org/content/23/9/1514.long)).  
+Here's an overview of how I did all that after running the Reinhardt *et al** scripts:
 
-Here's an overview of how I did all that:
+```
+## Get the intervals from the analysis files into the form that the Recombination Rate Calculator uses...
+
+python makeRRC_input.py ../reinhardt_2014_data/namerica/FST/chr2L.10kb.fst RRC_Input_empirical.chr2L.WeirCockerham.MAF0.05.txt
+
+```
+
+
+
+Here is an overview of the pipeline I used to calculate Fst from the Drosophila data and compare it with recombination rates
+
+Using the data from Reinhardt et al (sent to me by Andrew Kern) I generated a set of files that contained the pileup data for both the Floria (FLA) and Maine (MAINE) populations of *Drosophila melanogaster*:
+
+```
+python bin/read_pile_ups.py -p1 ../Drosophila/reinhardt_2014_data/namerica/FLA/chr2L.q40.pileup.human.trimmed -p2 ../Drosophila/reinhardt_2014_data/namerica/MAINE/chr2L.q40.pileup.human.trimmed -o namerica.alleles.chr2L.txt
+``` 
+
+I then calculated Fst from the data, similar to the above steps
+```
+python ../bin/calculateFst.py --freqs ../Drosophila/namerica.alleles.chr2L.txt --empiric --MAF 0.05 --windows 10000 > namerica.alleles.chr2L.MAF0.05.fst
+```
+
+I did not append recombination rates as I did with the simulation results, rather I extracted the coordinates of the analysis windows from the output files and used the recombination rate calculator to get the recombination rates specific to the analysed regions. I then analyse them all together in the R script ``` plottingScript.R ```.
+
+```
+# Make te RRC input files
+python bin/makeRRC_input.py namerica.alleles.chr2L.MAF0.05.fst namerica.alleles.chr2L.MAF0.05.windows
+
+# Run the RRC
+parallel "./RRC-open-v2.3.pl -M namerica.alleles.chr2L.MAF0.05.windows" ::: 2L 2R 3L 3R
+
+# This will make a bunch of files with the suffix .rrc, let's move those to the outputs/ directory
+
+mv *rrc ../outputs
+
+```
+
+
 
 
 ## Analysis of simulated and empirical data
