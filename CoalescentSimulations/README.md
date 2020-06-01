@@ -18,7 +18,4 @@ The script [plotHistograms.R](plotHistograms.R) plots the results of the coalesc
 
 
 
-![](Plots/Island_Fst_Plot.pdf)
-
-
-PS. If you read the paper and were annoyed by us saying that the *D<sub>XY</sub>* results were *data not shown*, here are those results. We were trying to get the paper to fit the fairly restrictive article type specifications. Supp. Mat. was not allowed for some reason.
+![](Plots/Fst_Dxy_Plot.png)
