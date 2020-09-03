@@ -1,5 +1,7 @@
 # Coalescent Simulations
 
+**Note that ```planeScript.py``` involves hard-coding parameters of interest and sample sizes, so be careful when using it!**
+
 In the MS we present results for an island model, but we explored other models too. The list below gives info on the models simulated. 
 
 * Island Model - 100 demes with symmetric migration
